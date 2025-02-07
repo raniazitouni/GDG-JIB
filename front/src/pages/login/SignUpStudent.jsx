@@ -63,7 +63,7 @@ function SignUpStudent() {
                                 name="firstName"
                                 value={formData.firstName}
                                 onChange={handleChange}
-                                placeholder="example@gmail.com"
+                                placeholder="Ramy"
                                 className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>
@@ -82,7 +82,7 @@ function SignUpStudent() {
                                 name="lastName"
                                 value={formData.lastName}
                                 onChange={handleChange}
-                                placeholder="example@gmail.com"
+                                placeholder="Abdeldjalil"
                                 className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>

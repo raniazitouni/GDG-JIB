@@ -4,11 +4,10 @@ import LogoWhite from "/Assets/loginAssets/LogoWhite.svg"; // Import the logo
 import Logo from "/Assets/Logo.svg"; // Import the logo
 import EyeCloseIcon from "/Assets/loginAssets/eye-closed.svg"; // Import the eye close icon
 
-function SignUpClub() {
+function SignUpCompany() {
     const [formData, setFormData] = useState({
-        clubName: "",
+        companyName: "",
         description: "",
-        instagramUsername: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -43,28 +42,25 @@ function SignUpClub() {
             </div>
 
             {/* Right Side */}
-            <div className="w-2/3 mt-5 bg-white flex items-start justify-center px-10 pt-8">
+            <div className="w-2/3 bg-white mt-9 flex items-start justify-center pt-8">
                 <div className="w-full max-w-2xl bg-white rounded-lg ">
                     <img src={Logo} alt="Logo" style={{ marginLeft: 0 }} />
-                    <h2 className="text-2xl font-base text-indigo-900 mb-12">
-                        Find talented students & offer scholarships
+                    <h2 className="text-3xl font-base text-indigo-900 mb-8">
+                        Discover opportunities & events
                     </h2>
-                    <form className="space-y-3" onSubmit={handleSubmit}>
-                        {/* Club Name */}
+                    <form className="space-y-4" onSubmit={handleSubmit}>
+                        {/* Company Name */}
                         <div>
-                            <label
-                                htmlFor="clubName"
-                                className="block text-sm font-base text-gray-700"
-                            >
-                                Club Name
+                            <label htmlFor="companyName" className="block text-sm font-base text-gray-700">
+                                Company Name
                             </label>
                             <input
                                 type="text"
-                                id="clubName"
-                                name="clubName"
-                                value={formData.clubName}
+                                id="companyName"
+                                name="companyName"
+                                value={formData.companyName}
+                                placeholder="Itihad Company"
                                 onChange={handleChange}
-                                placeholder="GDG Algiers"
                                 className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>
@@ -84,32 +80,10 @@ function SignUpClub() {
                             />
                         </div>
 
-                        {/* Instagram Username */}
+                        {/* Company Email */}
                         <div>
-                            <label
-                                htmlFor="instagramUsername"
-                                className="block text-sm font-base text-gray-700"
-                            >
-                                Instagram Username
-                            </label>
-                            <input
-                                type="text"
-                                id="instagramUsername"
-                                name="instagramUsername"
-                                value={formData.instagramUsername}
-                                onChange={handleChange}
-                                placeholder="example@gmail.com"
-                                className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            />
-                        </div>
-
-                        {/* Email */}
-                        <div>
-                            <label
-                                htmlFor="email"
-                                className="block text-sm font-base text-gray-700"
-                            >
-                                Email
+                            <label htmlFor="email" className="block text-sm font-base text-gray-700">
+                                Company Email
                             </label>
                             <input
                                 type="email"
@@ -117,17 +91,14 @@ function SignUpClub() {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="example@gmail.com"
+                                placeholder="example@company.com"
                                 className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                         </div>
 
                         {/* Password */}
                         <div>
-                            <label
-                                htmlFor="password"
-                                className="block text-sm font-base text-gray-700"
-                            >
+                            <label htmlFor="password" className="block text-sm font-base text-gray-700">
                                 Password
                             </label>
                             <div className="relative">
@@ -153,10 +124,7 @@ function SignUpClub() {
 
                         {/* Confirm Password */}
                         <div>
-                            <label
-                                htmlFor="confirmPassword"
-                                className="block text-sm font-base text-gray-700"
-                            >
+                            <label htmlFor="confirmPassword" className="block text-sm font-base text-gray-700">
                                 Confirm Password
                             </label>
                             <div className="relative">
@@ -186,7 +154,7 @@ function SignUpClub() {
                                 type="submit"
                                 className="w-full bg-[#13043F] text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             >
-                                Log in
+                                Sign Up
                             </button>
                         </div>
                     </form>
@@ -196,4 +164,4 @@ function SignUpClub() {
     );
 }
 
-export default SignUpClub;
+export default SignUpCompany;
