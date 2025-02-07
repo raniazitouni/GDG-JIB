@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import SideBar from "./components/shared/sideBar.jsx";
-import Navbar from "./components/shared/navbar.jsx";
+import SideBar from "./components/SideBar.jsx";
+import Navbar from "./components/NavBar.jsx";
 import Events from "./pages/events/Events.jsx";
 import AddEvent from "./pages/addEvent/AddEvent.jsx";
 import Setting from "./pages/Settings/Settings.jsx";
