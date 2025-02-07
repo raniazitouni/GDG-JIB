@@ -1,12 +1,16 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from bdd.models import Etudiant, Experience ,User, Club, Entreprise ,Quest
+from bdd.models import Etudiant, Experience ,User, Club, Entreprise ,Quest , CV
 from bdd.serializers import EtudiantSerializer , ExperienceSerializer , ClubSerializer, EntrepriseSerializer
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+from reportlab.lib.utils import simpleSplit
+import os
+from django.conf import settings
+from django.core.files import File
 
 
 
@@ -118,46 +122,72 @@ class UserProfileData(APIView):
 
 
 class GenerateCV(APIView):
-    def get(self, request, user_id):
+    def post(self, request, user_id):
         try:
-            # Fetch user, etudiant, and experience data
+            # Fetch the user and related data
             user = User.objects.get(id_user=user_id)
             etudiant = Etudiant.objects.get(id_user=user_id)
             experiences = Experience.objects.filter(id_user=user_id)
 
-            # Create a response that will return a PDF file
-            response = HttpResponse(content_type='application/pdf')
-            response['Content-Disposition'] = f'inline; filename="CV_{user.email}.pdf"'
+            # Create a file name and sanitize it to prevent path traversal
+            file_name = f"CV_{user.email}.pdf"
+            print ("hiiiiiiiiiiiiiiii2")
+            file_name = os.path.basename(file_name)  # Remove any path traversal characters
 
-            # Create a canvas object to generate the PDF
-            pdf_canvas = canvas.Canvas(response, pagesize=letter)
+            # Ensure the 'cvs' folder exists
+            file_path = os.path.join(settings.MEDIA_ROOT, 'cvs', file_name)
+            if not os.path.exists(os.path.dirname(file_path)):
+                os.makedirs(os.path.dirname(file_path))
+
+            # Create the PDF
+            pdf_canvas = canvas.Canvas(file_path, pagesize=letter)
             width, height = letter  # Standard letter size
 
-            # Add title
-            pdf_canvas.setFont("Helvetica-Bold", 18)
-            pdf_canvas.drawString(200, height - 50, f"Curriculum Vitae: {etudiant.nom} {etudiant.prenom}")
-
-            # User Info
+            # Add user info
+            pdf_canvas.setFont("Helvetica-Bold", 16)
+            pdf_canvas.drawString(50, height - 50, f"{etudiant.nom} {etudiant.prenom}")
             pdf_canvas.setFont("Helvetica", 12)
-            pdf_canvas.drawString(50, height - 100, f"Email: {user.email}")
-            pdf_canvas.drawString(50, height - 120, f"Role: {user.role}")
+            pdf_canvas.drawString(50, height - 70, f"Email: {user.email}")
 
-            # Etudiant Info
-            pdf_canvas.drawString(50, height - 160, f"Name: {etudiant.nom} {etudiant.prenom}")
-            pdf_canvas.drawString(50, height - 180, f"Skills: {etudiant.skills}")
+            # Add skills
+            pdf_canvas.setFont("Helvetica-Bold", 14)
+            pdf_canvas.drawString(50, height - 110, "Skills:")
+            pdf_canvas.setFont("Helvetica", 12)
+            skills_list = etudiant.skills.split(",")  # Assuming skills are stored as comma-separated values
+            y_position = height - 130
+            for skill in skills_list:
+                pdf_canvas.drawString(70, y_position, f"• {skill.strip()}")
+                y_position -= 20  # Move down for the next skill
 
-            # Experiences
-            pdf_canvas.drawString(50, height - 220, "Experience:")
-            y_position = height - 240
+            # Add experience
+            pdf_canvas.setFont("Helvetica-Bold", 14)
+            pdf_canvas.drawString(50, y_position, "Experience:")
+            pdf_canvas.setFont("Helvetica", 12)
+            y_position -= 20
             for exp in experiences:
-                pdf_canvas.drawString(50, y_position, f"Role: {exp.role} - {exp.date_debut} to {exp.date_fin}")
-                pdf_canvas.drawString(50, y_position - 20, f"Description: {exp.description}")
-                y_position -= 60  # Move down for the next experience
+                pdf_canvas.setFont("Helvetica-Bold", 12)
+                pdf_canvas.drawString(50, y_position, f"{exp.role} ({exp.date_debut} - {exp.date_fin})")
+                y_position -= 20
+                pdf_canvas.setFont("Helvetica", 12)
+                description_lines = simpleSplit(exp.description, "Helvetica", 12, width - 100)
+                for line in description_lines:
+                    pdf_canvas.drawString(70, y_position, line)
+                    y_position -= 20
 
-            # Save the PDF
+            # Save PDF to the file system
             pdf_canvas.save()
+            
+            print ("hiiiiiiiiiiiiiiii")
+        
+            # Now open the file and save it to the database
+            with open(file_path, 'rb') as pdf_file:
 
-            return response
+                cv_instance, created = CV.objects.update_or_create(
+                    id_user=user,
+                    defaults={'fichier': File(pdf_file, name=file_name)},
+                )
+
+            return Response({"message": "CV generated successfully"}, status=status.HTTP_200_OK)
 
         except User.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
@@ -165,3 +195,5 @@ class GenerateCV(APIView):
             return Response({'error': 'Etudiant not found'}, status=status.HTTP_404_NOT_FOUND)
         except Experience.DoesNotExist:
             return Response({'error': 'No experiences found for this user'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

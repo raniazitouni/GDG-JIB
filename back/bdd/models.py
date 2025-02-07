@@ -50,6 +50,7 @@ class Club(models.Model):
 # --- EVENT TABLE ---
 class Event(models.Model):
     id_event = models.AutoField(primary_key=True)
+    description = models.TextField( default="")
     nom = models.CharField(max_length=255)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
@@ -108,7 +109,7 @@ class Entreprise(models.Model):
 # --- OPPORTUNITIES TABLE ---
 class Opportunities(models.Model):
     id_opp = models.AutoField(primary_key=True)
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # Pour l'étudiant
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # Pour l'entreprise
     type = models.CharField(max_length=20, choices=OPPORTUNITY_TYPE_CHOICES)
     title = models.CharField(max_length=20)
     duree =   models.CharField(max_length=20)
@@ -130,14 +131,15 @@ class CV(models.Model):
 # --- NOTIFICATION TABLE ---
 class Notification(models.Model):
     id_notif = models.AutoField(primary_key=True)
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # Pour l'entreprise
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # Pour l'etudiant
     id_cv = models.ForeignKey(CV, on_delete=models.CASCADE)
     id_opp = models.ForeignKey(Opportunities, on_delete=models.CASCADE)
     etat = models.CharField(max_length=20, choices=NOTIF_ETAT_CHOICES)
 
     
 class Quest ( models.Model) :
-    id_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)  
+    id_quest = models.AutoField(primary_key=True) 
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # Pour l'etudiant  
     resp_one  = models.CharField(max_length=20 , default='idk' )
     resp_two  = models.CharField(max_length=20 , default='idk' )
     resp_three  = models.CharField(max_length=20 , default='idk' )
