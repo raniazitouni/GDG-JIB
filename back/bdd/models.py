@@ -78,7 +78,7 @@ class Etudiant(models.Model):
     id_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     nom = models.CharField(max_length=255)
     prenom = models.CharField(max_length=255)
-    skills = models.TextField()
+    skills = models.TextField( null=True)
 
     
 
@@ -88,7 +88,7 @@ class Experience(models.Model):
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     date_debut = models.DateField()
     date_fin = models.DateField()
-    domaine = models.CharField(max_length=255)
+    role = models.CharField(max_length=255)
     description = models.TextField()
     type = models.CharField(max_length=20, choices=EXPERIENCE_TYPE_CHOICES)
 
@@ -136,3 +136,9 @@ class Notification(models.Model):
     etat = models.CharField(max_length=20, choices=NOTIF_ETAT_CHOICES)
 
     
+class Quest ( models.Model) :
+    id_user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)  
+    resp_one  = models.CharField(max_length=20 , default='idk' )
+    resp_two  = models.CharField(max_length=20 , default='idk' )
+    resp_three  = models.CharField(max_length=20 , default='idk' )
+

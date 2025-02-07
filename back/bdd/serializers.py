@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Club, Event, Participant, Etudiant, Experience, Entreprise, Opportunities, CV, Notification
+from .models import User ,Quest, Club, Event, Participant, Etudiant, Experience, Entreprise, Opportunities, CV, Notification
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -53,6 +53,13 @@ class OpportunitiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Opportunities
         fields = '__all__'
+
+class QuestSerializer(serializers.ModelSerializer):
+    id_user = UserSerializer()  # Nested serializer for user
+    class Meta:
+        model = Quest
+        fields = '__all__'
+
 
 class CVSerializer(serializers.ModelSerializer):
     id_user = UserSerializer()  # Nested serializer for user
