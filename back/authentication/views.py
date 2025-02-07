@@ -32,7 +32,7 @@ class SignUpView(APIView):
      
         # Create the related table entry based on role
         if role == "etudiant":
-                Etudiant.objects.create(id_user=user, nom=data.get("nom"), prenom=data.get("prenom"), skills=data.get("skills"))
+                Etudiant.objects.create(id_user=user, nom=data.get("nom"), prenom=data.get("prenom"))
         elif role == "club":
                 Club.objects.create(id_user=user, nom=data.get("nom"), description=data.get("description"))
         elif role == "entreprise":
