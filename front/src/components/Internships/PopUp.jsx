@@ -1,6 +1,9 @@
-import cross from "../../../public/Assets/eventAssets/cross.svg";
-import Titre from "./Titre";
-export function PopUP({ clickHandler, formData, setFormData, fetch }) {
+import cross from "../../../public/Assets/eventAssets/cross.svg"
+import Titre from "./Title";
+
+export function PopUP({clickHandler , formData, setFormData}) {
+  
+
   function changeHandler(event) {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -8,23 +11,10 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
     }));
   }
 
-  const dataMapper = (formData) => {
-    return {
-      domaine: formData.Domaine,
-      type: formData.Type,
-      wilaya: formData.Wilaya,
-    };
-  };
-
-  const handleSubmit = async (event) => {
+  function handleSubmit(event) {
     event.preventDefault();
     console.log("Form Data Submitted:", formData);
-    const requestBody = {
-      formData: dataMapper(formData),
-    };
-    fetch(requestBody);
-    clickHandler();
-  };
+  }
 
   return (
     <div className="p-6 bg-white shadow-lg rounded-lg w-full max-w-md">
@@ -57,16 +47,16 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
           />
         </div>
 
-        {/* Wilaya */}
+        {/* Duree */}
         <div className="flex flex-col">
-          <label className="font-medium">Wilaya</label>
+          <label className="font-medium">Duree</label>
           <input
             type="text"
-            name="Wilaya"
-            value={formData.Wilaya}
+            name="duree"
+            value={formData.duree}
             onChange={changeHandler}
             className="border p-2 rounded-md"
-            placeholder="Entrez la wilaya"
+            placeholder="Duree ex : 2016-2019"
           />
         </div>
 
@@ -74,7 +64,7 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
           type="submit"
           className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
         >
-          Submit
+          save
         </button>
       </form>
     </div>

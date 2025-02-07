@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import ListCards from "../../components/Events/ListCards";
 import pic from "../../../public/Assets/eventAssets/image-Event.png";
 import SearchBar from "../../components/Events/SearchBar";
@@ -74,15 +75,10 @@ const Events = () => {
           IsClicked={IsClicked}
         />
       </div>
-
+  
       {IsClicked && (
         <div className="absolute inset-0 flex justify-center items-center bg-bg_gris bg-opacity-60 z-20">
-          <PopUP
-            clickHandler={clickHandler}
-            formData={formData}
-            setFormData={setFormData}
-            fetch={fetchSearch}
-          />
+          <PopUP clickHandler={clickHandler} formData={formData} setFormData={setFormData} />
         </div>
       )}
     </div>
