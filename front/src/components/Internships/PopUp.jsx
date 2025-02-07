@@ -1,5 +1,5 @@
 import cross from "../../../public/Assets/eventAssets/cross.svg"
-import Titre from "./Titre";
+import Titre from "./Title";
 
 export function PopUP({clickHandler , formData, setFormData}) {
   
@@ -47,16 +47,16 @@ export function PopUP({clickHandler , formData, setFormData}) {
           />
         </div>
 
-        {/* Wilaya */}
+        {/* Duree */}
         <div className="flex flex-col">
-          <label className="font-medium">Wilaya</label>
+          <label className="font-medium">Duree</label>
           <input
             type="text"
-            name="Wilaya"
-            value={formData.Wilaya}
+            name="duree"
+            value={formData.duree}
             onChange={changeHandler}
             className="border p-2 rounded-md"
-            placeholder="Entrez la wilaya"
+            placeholder="Duree ex : 2016-2019"
           />
         </div>
 
@@ -64,7 +64,7 @@ export function PopUP({clickHandler , formData, setFormData}) {
           type="submit"
           className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
         >
-          Submit
+          save
         </button>
       </form>
     </div>
