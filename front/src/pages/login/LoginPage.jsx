@@ -5,6 +5,7 @@ import Logo from "/Assets/Logo.svg"; // Import the logo
 import EmailIcon from "/Assets/loginAssets/email.svg"; // Import the email icon
 import PasswordIcon from "/Assets/loginAssets/password.svg"; // Import the password icon
 import EyeCloseIcon from "/Assets/loginAssets/eye-closed.svg"; // Import the eye-close icon
+import { fetchData } from "../../utils/utils";
 
 import { useAuth } from "../../AuthContext";
 
@@ -21,16 +22,20 @@ const LoginPage = () => {
   }, [user, pwd]);
 
   const handleLogin = async (e) => {
-     e.preventDefault();
+    e.preventDefault();
 
     const requestBody = {
       email: user,
       password: pwd,
     };
 
-    console.log(requestBody);
+    // console.log(requestBody);
 
-    const res = await fetchData("http://localhost:3000/login", "POST",requestBody );
+    const res = await fetchData(
+      "http://localhost:8000/authentication/signin/",
+      "POST",
+      requestBody
+    );
 
     if (res.error) {
       console.error("Login failed:", res.error);
@@ -38,9 +43,9 @@ const LoginPage = () => {
     } else {
       console.log("Login successful:", res);
       const accessToken = res.access_token;
-      const roles = res.roles;
+      const roles = res.role;
       const id_user = res.id_user;
-      setAuth({id_user, roles, accessToken });
+      setAuth({ id_user, roles, accessToken });
       setUser("");
       setPwd("");
       localStorage.setItem("token", res.token);

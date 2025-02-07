@@ -61,8 +61,8 @@ const SideBar = ({ Role }) => {
   const [active, setActive] = useState("/events");
 
   const liststatic = [
-    { name: "Profil", page: "/profil", icon: Profilicon , icon2 : Profilicon2},
-    { name: "Log Out", page: null, icon: LogOut , icon2: LogOut2},
+    { name: "Profil", page: "/profil", icon: Profilicon, icon2: Profilicon2 },
+    { name: "Log Out", page: null, icon: LogOut, icon2: LogOut2 },
   ];
 
   return (

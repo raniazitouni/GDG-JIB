@@ -1,4 +1,10 @@
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import SideBar from "./components/shared/sideBar.jsx";
 import Navbar from "./components/shared/navbar.jsx";
@@ -7,13 +13,37 @@ import AddEvent from "./pages/addEvent/AddEvent.jsx";
 import Setting from "./pages/Settings/Settings.jsx";
 import Profil from "./pages/profil/Profil.jsx";
 import RequireAuth from "./components/shared/required.jsx";
+import { useState, useEffect } from "react";
 
 const Layout = () => {
   const ROLES = ["etudiant", "club", "entreprise"];
 
   const { auth } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPage = location.pathname.replace("/", "");
+
+  const [redirected, setRedirected] = useState(false);
+
+  // Fonction pour obtenir la première page selon le rôle
+  const getFirstPage = (role) => {
+    switch (role) {
+      case "club":
+        return "/events";
+      case "etudiant":
+        return "/events";
+      default:
+        return "/events";
+    }
+  };
+
+  useEffect(() => {
+    if (auth && !redirected) {
+      const firstPage = getFirstPage(auth?.roles);
+      navigate(firstPage);
+      setRedirected(true);
+    }
+  }, [auth, redirected, navigate]);
 
   if (!auth) {
     return <Navigate to="/login" replace />;
@@ -38,7 +68,7 @@ const Layout = () => {
           <Route path="/settings" element={<Setting />} />
           <Route path="/profil" element={<Profil />} />
 
-          <Route path="unauthorized" element={<Unauthorized />} />
+          {/* <Route path="unauthorized" element={<Unauthorized />} /> */}
         </Routes>
       </div>
     </div>
