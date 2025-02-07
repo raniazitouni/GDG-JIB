@@ -17,9 +17,26 @@ const Events = () => {
 
   const [dataToSend, setDataToSend] = useState({ searchValue, formData });
 
+  const fetchSearch = async (requestBody) => {
+    const res = await fetchData(
+      "http://localhost:8000/search/events/",
+      "POST",
+      requestBody
+    );
+
+    console.log(res.events);
+
+    if (res.error) {
+      console.error("error:", res.error);
+    } else {
+      setEventList(res.events);
+    }
+  };
+
   useEffect(() => {
-    setDataToSend({ searchValue, formData });
-  }, [searchValue, formData]);
+    const requestBody = { searchValue: searchValue };
+    fetchSearch(requestBody);
+  }, [searchValue]);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -37,28 +54,10 @@ const Events = () => {
     fetchEvents();
   }, []);
 
-  const clickHandler = async (e) => {
+  const clickHandler = (e) => {
     SetIsClicked(!IsClicked);
 
     // console.log(requestBody);
-
-    const res = await fetchData(
-      "http://localhost:8000/search/search_events",
-      "POST",
-      dataToSend
-    );
-
-    if (res.error) {
-      console.error("error:", res.error);
-    } else {
-      setEventList(res.events);
-    }
-  };
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
@@ -82,6 +81,7 @@ const Events = () => {
             clickHandler={clickHandler}
             formData={formData}
             setFormData={setFormData}
+            fetch={fetchSearch}
           />
         </div>
       )}
