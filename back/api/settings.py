@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'authentication',
     'search' , 
     'events' ,
+    'profil' ,
 ]
 
 
