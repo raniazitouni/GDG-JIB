@@ -19,7 +19,7 @@ const SideBar = ({ Role }) => {
   let list = [];
 
   switch (Role) {
-    case "Club":
+    case "club":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
         { name: "Add event", page: "/add-event", icon: Add, icon2: Add2 },
@@ -32,7 +32,7 @@ const SideBar = ({ Role }) => {
       ];
       break;
 
-    case "user":
+    case "etudiant":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
         { name: "Opportunities", page: "/opportunities" },

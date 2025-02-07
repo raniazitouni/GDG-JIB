@@ -6,26 +6,39 @@ import Events from "./pages/events/Events.jsx";
 import AddEvent from "./pages/addEvent/AddEvent.jsx";
 import Setting from "./pages/Settings/Settings.jsx";
 import Profil from "./pages/profil/Profil.jsx";
+import RequireAuth from "./components/shared/required.jsx";
 
 const Layout = () => {
-  const { user } = useAuth();
+  const ROLES = ["etudiant", "club", "entreprise"];
+
+  const { auth } = useAuth();
   const location = useLocation();
   const currentPage = location.pathname.replace("/", "");
 
-  // if (!user) {
-  //   return <Navigate to="/login" replace />;
-  // }
+  if (!auth) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className="flex">
-      <SideBar Role={user?.role || "user"} />
+      <SideBar Role={auth?.roles || "etudiant"} />
       <div className="flex-1">
-        <Navbar page={currentPage} name={user?.name || "Guest"} />
+        <Navbar page={currentPage} name={auth?.name || "Guest"} />
         <Routes>
-          <Route path="/events" element={<Events />} />
-          <Route path="/add-event" element={<AddEvent />} />
+          <Route element={<RequireAuth allowedRoles={[ROLES[0], ROLES[1]]} />}>
+            <Route path="/events" element={<Events />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={[ROLES[1]]} />}>
+            <Route path="/add-event" element={<AddEvent />} />
+          </Route>
+
+          {/* add opportunities , interships , addinternships , chat */}
+
           <Route path="/settings" element={<Setting />} />
           <Route path="/profil" element={<Profil />} />
+
+          <Route path="unauthorized" element={<Unauthorized />} />
         </Routes>
       </div>
     </div>
