@@ -12,6 +12,9 @@ import Events from "./pages/events/AddEvents.jsx";
 import AddEvent from "./pages/events/AddEvents.jsx";
 import Setting from "./pages/Settings/Settings.jsx";
 import Profil from "./pages/profil/Profil.jsx";
+import Chat from "./pages/chat/Chat.jsx";
+import AddInternships from "./pages/addInternships/AddInternships.jsx";
+import Internships from "./pages/interships/internships.jsx";
 import RequireAuth from "./components/shared/RequireAuth.jsx";
 import { useState, useEffect } from "react";
 const Layout = () => {
@@ -31,6 +34,8 @@ const Layout = () => {
         return "/events";
       case "etudiant":
         return "/events";
+      case "entreprise":
+        return "/internships";
       default:
         return "/events";
     }
@@ -61,6 +66,20 @@ const Layout = () => {
           <Route element={<RequireAuth allowedRoles={[ROLES[1]]} />}>
             <Route path="/add-event" element={<AddEvent />} />
           </Route>
+
+          <Route element={<RequireAuth allowedRoles={[ROLES[0] ,ROLES[2]]} />}>
+            <Route path="/internships" element={<Internships />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={[ROLES[0]]} />}>
+            <Route path="/Chat" element={<Chat />} />
+          </Route>
+
+          <Route element={<RequireAuth allowedRoles={[ROLES[2]]} />}>
+            <Route path="/AddInternships" element={<AddInternships />} />
+          </Route>
+
+          
 
           {/* add opportunities , interships , addinternships , chat */}
 

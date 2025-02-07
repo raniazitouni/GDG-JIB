@@ -16,15 +16,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/loginPage" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/GetStarted" element={<GetStarted />} />
         <Route path="/SignUpStudent" element={<SignUpStudent />} />
-        <Route path="/SignUpClub" element={<SignUpClub />} />
         <Route path="/SignUpCompany" element={<SignUpCompany />} />
-        <Route path="/InternshipForm" element={<InternshipForm />} />
-        <Route path="/Settings" element={<Settings />} />
-        <Route path="/AddClubevents" element={<AddClubEvents />} />
-        <Route path="/AddCompanyEvents" element={<AddCompanyEvents />} />
+        <Route path="/SignUpClub" element={<SignUpClub />} />
+
+        <Route path="/*" element={<Layout />} />
       </Routes>
     </Router>
   );

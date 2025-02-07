@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'search' , 
     'events' ,
     'profil' ,
+    'maj' ,
 ]
 
 
@@ -131,6 +133,13 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# settings.py
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Define the URL to access media files
+MEDIA_URL = '/media/'
+
 
 
 # Static files (CSS, JavaScript, Images)

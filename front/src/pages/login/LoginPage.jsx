@@ -45,10 +45,11 @@ const LoginPage = () => {
       const accessToken = res.access_token;
       const roles = res.role;
       const id_user = res.id_user;
+
       setAuth({ id_user, roles, accessToken });
       setUser("");
       setPwd("");
-      localStorage.setItem("token", res.token);
+      localStorage.setItem("token", res.access_token);
       navigate("/*");
     }
   };
@@ -166,8 +167,19 @@ const LoginPage = () => {
                 Log in
               </button>
               {errMsg && (
-                <p className="text-sm text-red font-light">{errMsg}</p>
+                <p className="text-sm text-red-600 font-light my-2">{errMsg}</p>
               )}
+            </div>
+            <div className="text-left">
+              <p
+                className="text-l text-black hover:underline cursor-pointer"
+                onClick={() => {
+                  navigate("/GetStarted");
+                }}
+              >
+                Don’t have an account ?{" "}
+                <span className="text-indigo-600"> Create one</span>
+              </p>
             </div>
           </form>
         </div>
