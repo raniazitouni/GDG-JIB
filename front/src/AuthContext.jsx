@@ -7,29 +7,12 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  // Simulate fetching logged-in user from localStorage or API
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser) {
-      setUser(storedUser);
-    }
-  }, []);
-
-  const login = (userData) => {
-    localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-  };
-
+  const [auth, setAuth] = useState({});
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ auth, setAuth }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;

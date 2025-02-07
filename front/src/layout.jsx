@@ -14,7 +14,6 @@ import Setting from "./pages/Settings/Settings.jsx";
 import Profil from "./pages/profil/Profil.jsx";
 import RequireAuth from "./components/shared/RequireAuth.jsx";
 import { useState, useEffect } from "react";
-
 const Layout = () => {
   const ROLES = ["etudiant", "club", "entreprise"];
 
