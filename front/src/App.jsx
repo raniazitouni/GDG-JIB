@@ -6,12 +6,9 @@ import SignUpClub from "./pages/login/SignUpClub";
 import SignUpCompany from "./pages/login/SignUpCompany";
 import InternshipForm from "./pages/Internships/InternshipForm";
 import Layout from "./layout";
-import SideBar from "./components/SideBar"; // Adjust the path as needed
-import Navbar from "./components/NavBar";
 import LoginPage from "./pages/login/LoginPage";
-import GetStarted from "./pages/login/GetStarted"
+import GetStarted from "./pages/login/GetStarted";
 import Settings from "./pages/Settings/Settings"; // Adjust path
-
 
 function App() {
   return (
