@@ -1,15 +1,15 @@
 import { useState } from "react";
 import Logo from "/Assets/Logo.svg";
-import Grid from "/Assets/grid-4.svg";
-import Grid2 from "/Assets/grid-2.svg";
-import Add from "/Assets/add.svg";
-import Add2 from "/Assets/add2.svg";
-import Settings from "/Assets/settings.svg";
-import Settings2 from "/Assets/setting2.svg";
-import Profilicon from "/Assets/Profil.svg";
-import Profilicon2 from "/Assets/profil2.svg";
-import LogOut from "/Assets/logOut.svg";
-import LogOut2 from "/Assets/logOut2.svg";
+import Grid from "/Assets/sidebarAssets/grid-4.svg";
+import Grid2 from "/Assets/sidebarAssets/grid-2.svg";
+import Add from "/Assets/sidebarAssets/add.svg";
+import Add2 from "/Assets/sidebarAssets/add2.svg";
+import Settings from "/Assets/sidebarAssets/settings.svg";
+import Settings2 from "/Assets/sidebarAssets/setting2.svg";
+import Profilicon from "/Assets/sidebarAssets/Profil.svg";
+import Profilicon2 from "/Assets/sidebarAssets/profil2.svg";
+import LogOut from "/Assets/sidebarAssets/logOut.svg";
+import LogOut2 from "/Assets/sidebarAssets/logOut2.svg";
 
 import { useNavigate } from "react-router-dom";
 
