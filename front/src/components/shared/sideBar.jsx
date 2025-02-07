@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import Logo from "/Assets/Logo.svg";
 import Grid from "/Assets/sidebarAssets/grid-4.svg";
 import Grid2 from "/Assets/sidebarAssets/grid-2.svg";
@@ -116,6 +117,10 @@ const SideBar = ({ Role }) => {
       </div>
     </div>
   );
+};
+
+SideBar.propTypes = {
+  Role: PropTypes.string.isRequired,
 };
 
 export default SideBar;

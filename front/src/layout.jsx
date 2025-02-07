@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import SideBar from "./components/shared/sideBar.jsx";
 import Navbar from "./components/shared/navbar.jsx";
@@ -11,6 +11,10 @@ const Layout = () => {
   const { user } = useAuth();
   const location = useLocation();
   const currentPage = location.pathname.replace("/", "");
+
+  // if (!user) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   return (
     <div className="flex">
