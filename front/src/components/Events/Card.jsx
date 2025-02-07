@@ -2,14 +2,14 @@
 import Calendar_Days from "../../../public/Assets/eventAssets/Calendar_Days.svg";
 import Map_Pin from "../../../public/Assets/eventAssets/Map_Pin.svg";
 
-export function Card({ image, title, link, description, domaine, type, date, location }) {
+export function Card({ image, nom, link, description, domaine, type, date, location }) {
   return (
     <div className="w-[350px] relative px-4 py-3.5 gap-4 rounded bg-white flex flex-col shadow-lg shadow-gray-400 transition-shadow duration-300">
       {/* Image */}
-      <img className="w-full h-48 object-cover rounded" src={image} alt={title} />
+      <img className="w-full h-48 object-cover rounded" src={image} alt={nom} />
 
       {/* Titre */}
-      <h2 className="text-main_blue text-[20px] font-black mt-2">{title}</h2>
+      <h2 className="text-main_blue text-[20px] font-black mt-2">{nom}</h2>
 
       {/* Description */}
       <p className="text-gray-600 text-[13px] font-extralight">{description}</p>
