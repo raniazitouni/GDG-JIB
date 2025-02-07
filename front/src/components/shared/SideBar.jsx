@@ -11,9 +11,6 @@ import Profilicon from "/Assets/sidebarAssets/Profil.svg";
 import Profilicon2 from "/Assets/sidebarAssets/profil2.svg";
 import LogOut from "/Assets/sidebarAssets/logOut.svg";
 import LogOut2 from "/Assets/sidebarAssets/logOut2.svg";
-// Add internship icons import
-import Internship from "/Assets/sidebarAssets/InternShips.svg";
-import Internship2 from "/Assets/sidebarAssets/InternShips.svg";
 
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +19,7 @@ const SideBar = ({ Role }) => {
   let list = [];
 
   switch (Role) {
-    case "Club":
+    case "club":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
         { name: "Add event", page: "/add-event", icon: Add, icon2: Add2 },
@@ -35,24 +32,10 @@ const SideBar = ({ Role }) => {
       ];
       break;
 
-    case "Company":
-      list = [
-        { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
-        { name: "Internships", page: "/internships", icon: Internship, icon2: Internship2 },
-        {
-          name: "Settings",
-          page: "/settings",
-          icon: Settings,
-          icon2: Settings2,
-        },
-      ];
-      break;
-
-    case "user":
+    case "etudiant":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
         { name: "Opportunities", page: "/opportunities" },
-        { name: "Internships", page: "/internships", icon: Internship, icon2: Internship2 },
         {
           name: "Settings",
           page: "/settings",
@@ -78,8 +61,8 @@ const SideBar = ({ Role }) => {
   const [active, setActive] = useState("/events");
 
   const liststatic = [
-    { name: "Profil", page: "/profil", icon: Profilicon , icon2 : Profilicon2},
-    { name: "Log Out", page: null, icon: LogOut , icon2: LogOut2},
+    { name: "Profil", page: "/profil", icon: Profilicon, icon2: Profilicon2 },
+    { name: "Log Out", page: null, icon: LogOut, icon2: LogOut2 },
   ];
 
   return (
