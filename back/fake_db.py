@@ -89,7 +89,7 @@ for _ in range(7):
         id_user=random.choice(users),
         date_debut=fake.date_this_decade(),
         date_fin=fake.date_this_decade(),
-        domaine=fake.job(),
+        role=fake.job(),
         description=fake.text(),
         type=random.choice(EXPERIENCE_TYPES)
     )

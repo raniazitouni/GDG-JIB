@@ -25,7 +25,7 @@ class SignUpView(APIView):
                 role=role
             )
         
-         # Generate JWT token
+        # Generate JWT token
         refresh = RefreshToken.for_user(user)
         access_token = str(refresh.access_token)
 
@@ -39,7 +39,7 @@ class SignUpView(APIView):
                 Entreprise.objects.create(id_user=user, nom=data.get("nom"), description=data.get("description"))
 
         return Response(
-                {"message": "User created successfully", "access_token": access_token , "id_user": user.id_user , "role": role},
+                {"message": "User created successfully", "access_token": access_token , "id_user": user.id_user , "role": role ,"name" :data.get("nom") },
                 status=status.HTTP_201_CREATED,
         )
       
@@ -59,7 +59,7 @@ class SignInView(APIView):
                  access_token = str(refresh.access_token)
 
                  return Response(
-                   {"message": "User signed in successfully", "id_user": user.id_user, "role": user.role, "access_token": access_token},status=status.HTTP_200_OK,
+                   {"message": "User signed in successfully", "id_user": user.id_user, "role": user.role,"name" :data.get("nom") , "access_token": access_token},status=status.HTTP_200_OK,
                  )
         else:
                 return JsonResponse({"error": "Invalid email or password"}, status=400)
