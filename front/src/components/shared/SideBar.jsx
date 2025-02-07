@@ -37,7 +37,7 @@ const SideBar = ({ Role }) => {
     case "etudiant":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
-        { name: "Internships", page: "/interships", icon: Grid2, icon2: Grid },
+        { name: "Internships", page: "/internships", icon: Grid2, icon2: Grid },
         {
           name: "Settings",
           page: "/settings",
