@@ -8,8 +8,8 @@ import {
 import { useAuth } from "./AuthContext";
 import SideBar from "./components/shared/sideBar.jsx";
 import Navbar from "./components/shared/NavBar.jsx";
-import Events from "./pages/events/Events.jsx";
-import AddEvent from "./pages/addEvent/AddEvent.jsx";
+import Events from "./pages/events/AddEvents.jsx";
+import AddEvent from "./pages/events/AddEvents.jsx";
 import Setting from "./pages/Settings/Settings.jsx";
 import Profil from "./pages/profil/Profil.jsx";
 import RequireAuth from "./components/shared/RequireAuth.jsx";

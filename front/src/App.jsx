@@ -9,6 +9,8 @@ import Layout from "./layout";
 import LoginPage from "./pages/login/LoginPage";
 import GetStarted from "./pages/login/GetStarted";
 import Settings from "./pages/Settings/Settings"; // Adjust path
+import AddClubEvents from "./pages/addEvent/AddClubEvents"; // Adjust path
+import AddCompanyEvents from "./pages/addEvent/AddCompanyEvents"; // Adjust path
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/SignUpCompany" element={<SignUpCompany />} />
         <Route path="/InternshipForm" element={<InternshipForm />} />
         <Route path="/Settings" element={<Settings />} />
+        <Route path="/AddClubevents" element={<AddClubEvents />} />
+        <Route path="/AddCompanyEvents" element={<AddCompanyEvents />} />
       </Routes>
     </Router>
   );
