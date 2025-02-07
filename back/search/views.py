@@ -8,9 +8,10 @@ from rest_framework import status
 class search_events (APIView):
  
  def post (self, request, *args, **kwargs):
-    domaine = request.data.get('domaine', '').lower()
-    wilaya = request.data.get('wilaya', '').lower()
-    type_event = request.data.get('type', '').lower()
+    domaine = request.data.formData.get('domaine', '').lower()
+    wilaya = request.data.formData.get('wilaya', '').lower()
+    type_event = request.data.formData.get('type', '').lower()
+    nom = request.data.get('searchValue', '').lower()
 
     print ( 'hiiiiii' + type_event)
 
@@ -18,6 +19,8 @@ class search_events (APIView):
     events = Event.objects.all()
 
     # Apply filters dynamically
+    if nom :
+        events = events.filter(nom__icontains=nom)
     if domaine:
         events = events.filter(domaine__icontains=domaine)
     if wilaya:
@@ -40,6 +43,7 @@ class search_opp (APIView):
     domaine = request.data.get('domaine', '').lower()
     duree = request.data.get('duree', '').lower()
     type_opp = request.data.get('type', '').lower()
+   
 
     print ( 'hiiiiii' + type_opp)
 
