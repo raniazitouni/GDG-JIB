@@ -53,7 +53,7 @@ function SignUpStudent() {
                         <div>
                             <label
                                 htmlFor="firstName"
-                                className="block text-xl font-base text-gray-700"
+                                className="block text-sm font-base text-gray-700"
                             >
                                 First Name
                             </label>
@@ -72,7 +72,7 @@ function SignUpStudent() {
                         <div>
                             <label
                                 htmlFor="lastName"
-                                className="block text-xl font-base text-gray-700"
+                                className="block text-sm font-base text-gray-700"
                             >
                                 Last Name
                             </label>
@@ -91,7 +91,7 @@ function SignUpStudent() {
                         <div>
                             <label
                                 htmlFor="email"
-                                className="block text-xl font-base text-gray-700"
+                                className="block text-sm font-base text-gray-700"
                             >
                                 Email
                             </label>
@@ -110,7 +110,7 @@ function SignUpStudent() {
                         <div>
                         <label
                             htmlFor="password"
-                            className="block text-xl font-base text-gray-700"
+                            className="block text-sm font-base text-gray-700"
                         >
                             Password
                         </label>
@@ -139,7 +139,7 @@ function SignUpStudent() {
                     <div>
                         <label
                             htmlFor="confirmPassword"
-                            className="block text-xl font-base text-gray-700"
+                            className="block text-sm font-base text-gray-700"
                         >
                             Confirm Password
                         </label>
