@@ -4,9 +4,12 @@ import LogoWhite from "/Assets/loginAssets/LogoWhite.svg"; // Import the logo
 import Logo from "/Assets/Logo.svg"; // Import the logo
 import EyeCloseIcon from "/Assets/loginAssets/eye-closed.svg"; // Import the eye close icon
 import { fetchData } from "../../utils/utils";
-
+import { useAuth } from "../../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function SignUpCompany() {
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: "",
     description: "",
@@ -33,18 +36,21 @@ function SignUpCompany() {
     if (validateForm()) {
       console.log("Form Data:", formData);
       const requestBody = {
-        "nom": formData.companyName,
-        "description": formData.description,
-        "email": formData.email,
-        "password": formData.password,
-        "role": "company",
+        nom: formData.companyName,
+        description: formData.description,
+        email: formData.email,
+        password: formData.password,
+        role: "entreprise",
       };
+      console.log(requestBody);
 
       const res = await fetchData(
         "http://localhost:8000/authentication/signup/",
         "POST",
         requestBody
       );
+      console.log("res",res);
+      
 
       if (res.error) {
         console.error("SignUp failed:", res.error);
@@ -55,7 +61,7 @@ function SignUpCompany() {
         const roles = res.role;
         const id_user = res.id_user;
         setAuth({ id_user, roles, accessToken });
-        localStorage.setItem("token", res.token);
+        localStorage.setItem("token", res.access_token);
         navigate("/*");
       }
     }

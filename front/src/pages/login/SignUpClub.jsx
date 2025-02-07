@@ -4,8 +4,13 @@ import LogoWhite from "/Assets/loginAssets/LogoWhite.svg"; // Import the logo
 import Logo from "/Assets/Logo.svg"; // Import the logo
 import EyeCloseIcon from "/Assets/loginAssets/eye-closed.svg"; // Import the eye close icon
 import { fetchData } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
+
 
 function SignUpClub() {
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
   const [formData, setFormData] = useState({
     clubName: "",
     description: "",
@@ -38,7 +43,7 @@ function SignUpClub() {
           instagramusername: formData.instagramUsername,
           email: formData.email,
           password: formData.password,
-          role: "company",
+          role: "club",
         };
   
         const res = await fetchData(
@@ -56,7 +61,7 @@ function SignUpClub() {
           const roles = res.role;
           const id_user = res.id_user;
           setAuth({ id_user, roles, accessToken });
-          localStorage.setItem("token", res.token);
+          localStorage.setItem("token", res.access_token);
           navigate("/*");
         }
       }

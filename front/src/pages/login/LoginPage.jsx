@@ -25,8 +25,8 @@ const LoginPage = () => {
     e.preventDefault();
 
     const requestBody = {
-      "email": user,
-      "password": pwd,
+      email: user,
+      password: pwd,
     };
 
     // console.log(requestBody);
@@ -45,10 +45,11 @@ const LoginPage = () => {
       const accessToken = res.access_token;
       const roles = res.role;
       const id_user = res.id_user;
+
       setAuth({ id_user, roles, accessToken });
       setUser("");
       setPwd("");
-      localStorage.setItem("token", res.token);
+      localStorage.setItem("token", res.access_token);
       navigate("/*");
     }
   };
