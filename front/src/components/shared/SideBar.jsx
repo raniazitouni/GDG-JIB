@@ -11,6 +11,8 @@ import Profilicon from "/Assets/sidebarAssets/Profil.svg";
 import Profilicon2 from "/Assets/sidebarAssets/profil2.svg";
 import LogOut from "/Assets/sidebarAssets/logOut.svg";
 import LogOut2 from "/Assets/sidebarAssets/logOut2.svg";
+import Chat from "/Assets/sidebarAssets/Chat.svg";
+import Chat2 from "/Assets/sidebarAssets/Chat2.svg";
 
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +21,7 @@ const SideBar = ({ Role }) => {
   let list = [];
 
   switch (Role) {
-    case "Club":
+    case "club":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
         { name: "Add event", page: "/add-event", icon: Add, icon2: Add2 },
@@ -32,10 +34,29 @@ const SideBar = ({ Role }) => {
       ];
       break;
 
-    case "user":
+    case "etudiant":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
-        { name: "Opportunities", page: "/opportunities" },
+        { name: "Internships", page: "/interships", icon: Grid2, icon2: Grid },
+        {
+          name: "Settings",
+          page: "/settings",
+          icon: Settings,
+          icon2: Settings2,
+        },
+        { name: "Chat", page: "/Chat", icon: Chat, icon2: Chat2 },
+      ];
+      break;
+
+    case "entreprise":
+      list = [
+        { name: "Internships", page: "/interships", icon: Grid2, icon2: Grid },
+        {
+          name: "Add internships",
+          page: "/addInternships",
+          icon: Add,
+          icon2: Add2,
+        },
         {
           name: "Settings",
           page: "/settings",
@@ -44,25 +65,13 @@ const SideBar = ({ Role }) => {
         },
       ];
       break;
-
-    default:
-      list = [
-        { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
-        { name: "Add event", page: "/add-event", icon: Add, icon2: Add2 },
-        {
-          name: "Settings",
-          page: "/settings",
-          icon: Settings,
-          icon2: Settings2,
-        },
-      ];
   }
 
   const [active, setActive] = useState("/events");
 
   const liststatic = [
-    { name: "Profil", page: "/profil", icon: Profilicon , icon2 : Profilicon2},
-    { name: "Log Out", page: null, icon: LogOut , icon2: LogOut2},
+    { name: "Profil", page: "/profil", icon: Profilicon, icon2: Profilicon2 },
+    { name: "Log Out", page: "/login", icon: LogOut, icon2: LogOut2 },
   ];
 
   return (
@@ -104,6 +113,9 @@ const SideBar = ({ Role }) => {
             onClick={() => {
               setActive(item.page);
               navigate(item.page);
+              if (item.name == "Log Out") {
+                localStorage.removeItem("token");
+              }
             }}
           >
             <img

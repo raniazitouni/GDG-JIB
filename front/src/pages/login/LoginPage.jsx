@@ -1,12 +1,59 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import LogoWhite from "/Assets/loginAssets/LogoWhite.svg"; // Import the logo
 import Logo from "/Assets/Logo.svg"; // Import the logo
 import EmailIcon from "/Assets/loginAssets/email.svg"; // Import the email icon
 import PasswordIcon from "/Assets/loginAssets/password.svg"; // Import the password icon
 import EyeCloseIcon from "/Assets/loginAssets/eye-closed.svg"; // Import the eye-close icon
+import { fetchData } from "../../utils/utils";
 
-function LoginPage() {
+import { useAuth } from "../../AuthContext";
+
+const LoginPage = () => {
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd]);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const requestBody = {
+      email: user,
+      password: pwd,
+    };
+
+    // console.log(requestBody);
+
+    const res = await fetchData(
+      "http://localhost:8000/authentication/signin/",
+      "POST",
+      requestBody
+    );
+
+    if (res.error) {
+      console.error("Login failed:", res.error);
+      setErrMsg("Login Failed");
+    } else {
+      console.log("Login successful:", res);
+      const accessToken = res.access_token;
+      const roles = res.role;
+      const id_user = res.id_user;
+
+      setAuth({ id_user, roles, accessToken });
+      setUser("");
+      setPwd("");
+      localStorage.setItem("token", res.access_token);
+      navigate("/*");
+    }
+  };
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -36,7 +83,7 @@ function LoginPage() {
           >
             Log in to Your Account
           </h2>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleLogin}>
             {/* Email Field */}
             <div className="relative">
               <label
@@ -56,6 +103,9 @@ function LoginPage() {
                   id="email"
                   placeholder="example@gmail.com"
                   className="w-full pl-12 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                  onChange={(e) => setUser(e.target.value)}
+                  value={user}
+                  required
                 />
               </div>
             </div>
@@ -79,6 +129,9 @@ function LoginPage() {
                   id="password"
                   placeholder="*********************"
                   className="w-full pl-12 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                  onChange={(e) => setPwd(e.target.value)}
+                  value={pwd}
+                  required
                 />
                 <button
                   type="button"
@@ -106,19 +159,33 @@ function LoginPage() {
             </div>
 
             {/* Login Button */}
-            <div>
+            <div className="flex flex-col">
               <button
                 type="submit"
                 className="w-full bg-[#13043F] text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
               >
                 Log in
               </button>
+              {errMsg && (
+                <p className="text-sm text-red-600 font-light my-2">{errMsg}</p>
+              )}
+            </div>
+            <div className="text-left">
+              <p
+                className="text-l text-black hover:underline cursor-pointer"
+                onClick={() => {
+                  navigate("/GetStarted");
+                }}
+              >
+                Don’t have an account ?{" "}
+                <span className="text-indigo-600"> Create one</span>
+              </p>
             </div>
           </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;

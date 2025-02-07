@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import ListCards from "../../components/Events/ListCards";
 import pic from "../../../public/Assets/eventAssets/image-Event.png";
 import SearchBar from "../../components/Events/SearchBar";
@@ -57,6 +58,28 @@ const Events = () => {
       location: "Bordeaux",
     },
   ];
+=======
+import { useEffect, useState } from "react";
+import {fetchData} from "../../utils/utils.js"
+
+
+const Events = () => {
+  const [events, setEvents] = useState([]);
+  
+  // useEffect(() => {
+  //   const getEvents = async () => {
+  //     const res = await fetchData("http://localhost:3000/events");
+  //     console.log(res);
+      
+  //     setEvents(res); // Store the events in state
+  //   };
+
+  //   getEvents(); // Call the function when the component mounts
+  // }, []); // Empty dependency array ensures it runs only once
+
+  return <>events</>;
+}
+>>>>>>> aa39b2d9366b511753d79bec95ecafc1494a0d4c
 
   const [IsClicked, SetIsClicked] = useState(false); // to open the pop up and close it
   const [searchValue, setSearchValue] = useState(""); // Store input value
