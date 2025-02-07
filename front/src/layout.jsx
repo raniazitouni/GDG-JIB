@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import SideBar from "./components/shared/sideBar.jsx";
-import Navbar from "./components/shared/navbar.jsx";
+import Navbar from "./components/shared/NavBar.jsx";
 import Events from "./pages/events/Events.jsx";
 import AddEvent from "./pages/addEvent/AddEvent.jsx";
 import Setting from "./pages/Settings/Settings.jsx";
@@ -15,9 +15,8 @@ import Profil from "./pages/profil/Profil.jsx";
 import Chat from "./pages/chat/Chat.jsx";
 import AddInternships from "./pages/addInternships/AddInternships.jsx";
 import Internships from "./pages/interships/internships.jsx";
-import RequireAuth from "./components/shared/required.jsx";
+import RequireAuth from "./components/shared/RequireAuth.jsx";
 import { useState, useEffect } from "react";
-
 const Layout = () => {
   const ROLES = ["etudiant", "club", "entreprise"];
 
