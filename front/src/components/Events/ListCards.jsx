@@ -7,16 +7,13 @@ export function ListCards({ events,  IsClicked }) {
   return (
     <>
       <div
-        className="min-h-0  grid grid-cols-1 
-      md:grid-cols-3 gap-x-[0px] gap-y-[23px] w-full bg-[#f3f3f3]"
+        className="pb-20 max-h-[calc(100vh-100px)] grid grid-cols-1 
+           md:grid-cols-3 gap-x-[0px] gap-y-[23px] w-full bg-[#f3f3f3] overflow-y-auto"
       >
         {events.map((card, index) => (
           <Card key={index} {...card} />
         ))}
       </div>
-        
-      
-      
     </>
   );
 }

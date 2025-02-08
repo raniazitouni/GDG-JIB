@@ -4,7 +4,8 @@ export const fetchData = async (
   url,
   method = "GET",
   data = null,
-  token = null
+  token = null,
+  isBlob = false
 ) => {
   try {
     const headers = {
@@ -19,10 +20,11 @@ export const fetchData = async (
       url,
       method,
       headers,
-      data, 
+      data,
+      responseType: isBlob ? "blob" : "json",
     });
 
-    return response.data; 
+    return response.data;
   } catch (error) {
     console.error("Fetch error:", error);
     return { error: error.message };

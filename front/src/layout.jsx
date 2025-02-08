@@ -14,8 +14,10 @@ import Setting from "./pages/Settings/Settings.jsx";
 import Profil from "./pages/profil/Profil.jsx";
 import Chat from "./pages/chat/Chat.jsx";
 import AddInternships from "./pages/addInternships/AddInternships.jsx";
+import InternshipForm from "./pages/Internships/InternshipForm.jsx";
 import Internships from "./pages/interships/internships.jsx";
 import RequireAuth from "./components/shared/RequireAuth.jsx";
+
 import { useState, useEffect } from "react";
 const Layout = () => {
   const ROLES = ["etudiant", "club", "entreprise"];
@@ -79,7 +81,9 @@ const Layout = () => {
             <Route path="/AddInternships" element={<AddInternships />} />
           </Route>
 
-          {/* add opportunities , interships , addinternships , chat */}
+          <Route element={<RequireAuth allowedRoles={[ROLES[0]]} />}>
+            <Route path="/ApplyInternships" element={<InternshipForm />} />
+          </Route>
 
           {/* <Route path="/settings" element={<Setting />} /> */}
           <Route path="/profil" element={<Setting />} />
