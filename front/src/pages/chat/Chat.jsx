@@ -41,7 +41,7 @@ const Chat = () => {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`w-1/3 px-2 py-4 rounded-lg my-2 bg-white ${
+            className={`w-2/3 px-2 py-4 rounded-lg my-2 bg-white ${
               msg.role === "user"
                 ? "border-l-4 border-BlueA mr-auto"
                 : "border-r-4 border-BlueA ml-auto"

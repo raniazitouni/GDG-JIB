@@ -50,7 +50,7 @@ const SideBar = ({ Role }) => {
 
     case "entreprise":
       list = [
-        { name: "Internships", page: "/interships", icon: Grid2, icon2: Grid },
+        { name: "Internships", page: "/internships", icon: Grid2, icon2: Grid },
         {
           name: "Add internships",
           page: "/addInternships",
@@ -67,7 +67,16 @@ const SideBar = ({ Role }) => {
       break;
   }
 
-  const [active, setActive] = useState("/events");
+  const [active, setActive] = useState(()=>{switch (Role) {
+    case "club":
+      return "/events";
+    case "etudiant":
+      return "/events";
+    case "entreprise":
+      return "/internships";
+    default:
+      return "/events";}
+  });
 
   const liststatic = [
     { name: "Profil", page: "/profil", icon: Profilicon, icon2: Profilicon2 },
