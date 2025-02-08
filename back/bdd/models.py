@@ -117,6 +117,7 @@ class Opportunities(models.Model):
     description = models.CharField(max_length=255, default="No description available")  # Set default
     location = models.CharField(max_length=20)
     date_debut = models.DateField(default="2025-01-01")
+    img = models.ImageField(upload_to='event_images/', blank=True, null=True) 
    
 
 
@@ -140,7 +141,7 @@ class Notification(models.Model):
 class Quest ( models.Model) :
     id_quest = models.AutoField(primary_key=True) 
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # Pour l'etudiant  
-    resp_one  = models.CharField(max_length=20 , default='idk' )
-    resp_two  = models.CharField(max_length=20 , default='idk' )
-    resp_three  = models.CharField(max_length=20 , default='idk' )
+    resp_one  = models.TextField( default='I want to gain practical experience in my field, develop my skills, and learn from professionals in a real work environment.' )
+    resp_two  = models.TextField(default='I admire your company''s work in tech field , and this role aligns perfectly with my skills and career goals. I’m excited about the opportunity to contribute and learn.' )
+    resp_three  = models.TextField( default='I hope to gain hands-on experience, improve my technical and soft skills, and learn from industryprofessionals to prepare for my future career.' )
 

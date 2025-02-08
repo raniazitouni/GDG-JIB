@@ -60,7 +60,9 @@ function SignUpCompany() {
         const accessToken = res.access_token;
         const roles = res.role;
         const id_user = res.id_user;
-        setAuth({ id_user, roles, accessToken });
+      const name = res.name;
+
+        setAuth({ id_user, roles, accessToken , name });
         localStorage.setItem("token", res.access_token);
         navigate("/*");
       }
