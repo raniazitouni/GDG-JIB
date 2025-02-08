@@ -117,6 +117,7 @@ class Opportunities(models.Model):
     description = models.CharField(max_length=255, default="No description available")  # Set default
     location = models.CharField(max_length=20)
     date_debut = models.DateField(default="2025-01-01")
+    img = models.ImageField(upload_to='event_images/', blank=True, null=True) 
    
 
 
@@ -132,9 +133,10 @@ class CV(models.Model):
 class Notification(models.Model):
     id_notif = models.AutoField(primary_key=True)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)  # Pour l'etudiant
-    id_cv = models.ForeignKey(CV, on_delete=models.CASCADE)
     id_opp = models.ForeignKey(Opportunities, on_delete=models.CASCADE)
     etat = models.CharField(max_length=20, choices=NOTIF_ETAT_CHOICES)
+    cv_path = models.CharField(max_length=500 , default="")
+   
 
     
 class Quest ( models.Model) :
