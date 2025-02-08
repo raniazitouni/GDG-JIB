@@ -45,8 +45,9 @@ const LoginPage = () => {
       const accessToken = res.access_token;
       const roles = res.role;
       const id_user = res.id_user;
+      const name = res.name;
 
-      setAuth({ id_user, roles, accessToken });
+      setAuth({ id_user, roles, accessToken , name});
       setUser("");
       setPwd("");
       localStorage.setItem("token", res.access_token);

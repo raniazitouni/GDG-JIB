@@ -81,7 +81,7 @@ const SideBar = ({ Role }) => {
         {list.map((item, index) => (
           <div
             key={index}
-            className={`flex flex-row rounded-lg w-full px-3.5 py-3 hover:cursor-pointer ${
+            className={`flex flex-row rounded-lg w-full px-3.5 py-1 hover:cursor-pointer ${
               active == item.page
                 ? "bg-BlueA text-white"
                 : "bg-WhiteC text-BlueA"
@@ -94,9 +94,9 @@ const SideBar = ({ Role }) => {
             <img
               src={active == item.page ? item.icon2 : item.icon}
               alt={item.name}
-              className="w-10 h-10 object-contain px-2"
+              className="w-9 h-9 object-contain px-2 mr-1"
             />
-            <div className="font-bold text-lg py-1.5">{item.name}</div>
+            <div className="font-bold text-base py-1.5">{item.name}</div>
           </div>
         ))}
       </div>
@@ -105,7 +105,7 @@ const SideBar = ({ Role }) => {
         {liststatic.map((item, index) => (
           <div
             key={index}
-            className={`flex flex-row rounded-lg w-full px-3.5 py-3 hover:cursor-pointer ${
+            className={`flex flex-row rounded-lg w-full px-3.5 py-1 hover:cursor-pointer ${
               active == item.page
                 ? "bg-BlueA text-white"
                 : "bg-WhiteC text-BlueA"
@@ -121,9 +121,9 @@ const SideBar = ({ Role }) => {
             <img
               src={active == item.page ? item.icon2 : item.icon}
               alt={item.name}
-              className="w-10 h-10 object-contain px-2"
+              className="w-9 h-9 object-contain px-2 mr-1"
             />
-            <div className="font-bold text-lg py-1.5">{item.name}</div>
+            <div className="font-bold text-base py-1.5">{item.name}</div>
           </div>
         ))}
       </div>
