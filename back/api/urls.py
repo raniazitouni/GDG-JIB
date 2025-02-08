@@ -28,6 +28,8 @@ urlpatterns = [
     path('info/', include('events.urls')),
     path('profil/', include('profil.urls')),
     path('maj/', include('maj.urls')),
+    path('chatbot/', include('chatbot.urls')),
+
 
 ]
 
