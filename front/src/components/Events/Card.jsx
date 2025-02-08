@@ -16,7 +16,7 @@ export function Card({
 
 
   return (
-    <div className="w-[350px] relative px-4 py-3.5 gap-4 rounded bg-white flex flex-col shadow-lg shadow-gray-400 transition-shadow duration-300">
+    <div className="w-[350px] relative px-4  py-3.5 gap-4 rounded bg-white flex flex-col shadow-lg shadow-gray-400 transition-shadow ">
       {/* Image */}
       <img
         className="w-full h-48 object-cover rounded"

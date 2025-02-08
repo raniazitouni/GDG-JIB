@@ -28,7 +28,7 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
   };
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg w-full max-w-md">
+    <div className="p-6 bg-white shadow-lg rounded-lg w-full ">
       
       <Titre text="Filters" icon={cross} clickHandler={clickHandler} />
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
