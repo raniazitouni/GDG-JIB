@@ -44,7 +44,7 @@ function SignUpClub() {
           email: formData.email,
           password: formData.password,
           role: "club",
-        };
+        };   
   
         const res = await fetchData(
           "http://localhost:8000/authentication/signup/",

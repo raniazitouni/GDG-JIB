@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 // Create context
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // Custom hook to use AuthContext
 export const useAuth = () => useContext(AuthContext);
