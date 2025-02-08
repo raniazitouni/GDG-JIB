@@ -75,16 +75,21 @@ const Events = () => {
         />
       </div>
 
-      {IsClicked && (
-        <div className="absolute inset-0 flex justify-center items-center bg-bg_gris bg-opacity-60 z-20">
-          <PopUP
-            clickHandler={clickHandler}
-            formData={formData}
-            setFormData={setFormData}
-            fetch={fetchSearch}
-          />
-        </div>
-      )}
+      <div>
+          {IsClicked && (
+          <div className="absolute inset-0 flex justify-center items-center w-full h-full bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg opacity-100">
+            <PopUP
+              clickHandler={clickHandler}
+              formData={formData}
+              setFormData={setFormData}
+              fetch={fetchSearch}
+            />
+          </div>
+          </div>
+          )}
+      </div>
+      
     </div>
   );
 };
