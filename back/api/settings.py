@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'events' ,
     'profil' ,
     'maj' ,
+    'chatbot'
 ]
 
 

@@ -1,9 +1,6 @@
-import cross from "../../../public/Assets/eventAssets/cross.svg"
+import cross from "../../../public/Assets/eventAssets/cross.svg";
 import Titre from "./Titre";
-
-export function PopUP({clickHandler , formData, setFormData}) {
-  
-
+export function PopUP({ clickHandler, formData, setFormData, fetch }) {
   function changeHandler(event) {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -11,10 +8,24 @@ export function PopUP({clickHandler , formData, setFormData}) {
     }));
   }
 
-  function handleSubmit(event) {
+  const dataMapper = (formData) => {
+    return {
+      domaine: formData.Domaine,
+      type: formData.Type,
+      wilaya: formData.Wilaya,
+    }; 
+    
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Form Data Submitted:", formData);
-  }
+    const requestBody = {
+      formData: dataMapper(formData),
+    };
+    fetch(requestBody);
+    clickHandler();
+  };
 
   return (
     <div className="p-6 bg-white shadow-lg rounded-lg w-full max-w-md">

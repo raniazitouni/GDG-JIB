@@ -3,7 +3,7 @@ import Card from "./Card";
 
 
 export function ListCards({ events,  IsClicked }) {
-  console.log(IsClicked);
+  // console.log(IsClicked);
   return (
     <>
       <div

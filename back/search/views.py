@@ -8,9 +8,11 @@ from rest_framework import status
 class search_events (APIView):
  
  def post (self, request, *args, **kwargs):
-    domaine = request.data.formData.get('domaine', '').lower()
-    wilaya = request.data.formData.get('wilaya', '').lower()
-    type_event = request.data.formData.get('type', '').lower()
+
+    formData = request.data.get('formData', {})
+    domaine = formData.get('domaine', '').lower()
+    wilaya = formData.get('wilaya', '').lower()
+    type_event = formData.get('type', '').lower()
     nom = request.data.get('searchValue', '').lower()
 
     print ( 'hiiiiii' + type_event)
@@ -40,9 +42,13 @@ class search_events (APIView):
 class search_opp (APIView):
  
  def post (self, request, *args, **kwargs):
-    domaine = request.data.get('domaine', '').lower()
-    duree = request.data.get('duree', '').lower()
-    type_opp = request.data.get('type', '').lower()
+    
+    formData = request.data.get('formData', {})
+    domaine = formData.get('domaine', '').lower()
+    duree = formData.get('duree', '').lower()
+    type_opp = formData.get('type', '').lower()
+    title = request.data.get('searchValue', '').lower()
+
    
 
     print ( 'hiiiiii' + type_opp)
@@ -51,6 +57,8 @@ class search_opp (APIView):
     opps = Opportunities.objects.all()
 
     # Apply filters dynamically
+    if title :
+        opps = opps.filter(title__icontains=title)
     if domaine:
         opps = opps.filter(domaine__icontains=domaine)
     if duree:
@@ -64,7 +72,3 @@ class search_opp (APIView):
                 {"message": "User created successfully", "Opportunities": serliazer_opp},
                 status=status.HTTP_201_CREATED,
         )
-      
-
-
-      
