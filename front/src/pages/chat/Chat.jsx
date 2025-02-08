@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { fetchData } from "../../utils/utils";
+import chatlogo from "../../../public/Assets/chatAssets/chat.svg";
+import vector from "../../../public/Assets/chatAssets/vector.svg";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -6,59 +9,64 @@ const Chat = () => {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
-    
+
     const userMessage = { role: "user", content: input };
     setMessages([...messages, userMessage]);
     setInput("");
 
-    try {
-      const response = await fetch("http://127.0.0.1:8000/chatbot/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input 
-
-
-
-
-
-        }),
-      });
-
-      const data = await response.json();
-      
+    const data = await fetchData("http://localhost:8000/chatbot/", "POST", {
+      message: input,
+    });
+    if (data.error) {
+      console.error("error:", res.error);
+    } else {
       if (data.message) {
-        setMessages((prev) => [...prev, { role: "bot", content: data.message }]);
-      }else {
-        setMessages((prev) => [...prev, { role: "bot", content: "Error: No response from the bot." }]);
+        setMessages((prev) => [
+          ...prev,
+          { role: "bot", content: data.message },
+        ]);
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          { role: "bot", content: "Error: No response from the bot." },
+        ]);
       }
-    } catch (error) {
-      console.error("Erreur lors de l'envoi du message", error);
     }
-  }
-  
+  };
+
   return (
-    <div className="w-full max-w-lg mx-auto p-4 border rounded-lg shadow-lg">
-      <div className="h-80 overflow-y-auto border-b p-2">
+    <div className="flex flex-col justify-between  w-full px-24 pt-14 pb-36 bg-WhiteC h-screen">
+      <img src={chatlogo} className="h-24 object-contain" />
+      <div className=" overflow-y-auto border-b p-2">
         {messages.map((msg, index) => (
-          <div key={index} className={`my-2 p-2 rounded ${msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
+          <div
+            key={index}
+            className={`w-1/3 px-2 py-4 rounded-lg my-2 bg-white ${
+              msg.role === "user"
+                ? "border-l-4 border-BlueA mr-auto"
+                : "border-r-4 border-BlueA ml-auto"
+            }`}
+          >
             {msg.content}
           </div>
         ))}
       </div>
-      <div className="flex mt-4">
+      <div className="flex mt-4 relative">
         <input
-          className="flex-grow p-2 border rounded-l"
+          className="flex-grow py-6 px-4  rounded-lg border-t-2 border-b-2 border-BlueA"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Écrivez un message..."
+          placeholder="Type a new message here"
         />
-        <button className="p-2 bg-blue-600 text-white rounded-r" onClick={sendMessage}>
-          Envoyer
-        </button>
+        <img
+          src={vector}
+          className="w-8 h-8 object-contain absolute top-0 right-0 m-6 hover:cursor-pointer"
+          onClick={sendMessage}
+        />
+       
       </div>
     </div>
   );
-}
+};
 
-export default Chat
-
+export default Chat;
