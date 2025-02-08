@@ -52,6 +52,13 @@ class SignInView(APIView):
         password = data.get("password")
 
         user = User.objects.filter(email=email).first()
+        
+        if user.role == "etudiant":
+                nom = Etudiant.objects.filter(id_user=user).first().nom
+        elif user.role == "club":
+                 nom =Club.objects.filter(id_user=user).first().nom
+        elif user.role == "entreprise":
+                 nom =Entreprise.objects.filter(id_user=user).first().nom
 
         if user and check_password(password, user.password):  # Check password
                  # Generate JWT token
@@ -59,7 +66,7 @@ class SignInView(APIView):
                  access_token = str(refresh.access_token)
 
                  return Response(
-                   {"message": "User signed in successfully", "id_user": user.id_user, "role": user.role,"name" :data.get("nom") , "access_token": access_token},status=status.HTTP_200_OK,
+                   {"message": "User signed in successfully", "id_user": user.id_user, "role": user.role,"name" :nom , "access_token": access_token},status=status.HTTP_200_OK,
                  )
         else:
                 return JsonResponse({"error": "Invalid email or password"}, status=400)
