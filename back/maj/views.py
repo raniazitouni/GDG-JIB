@@ -1,15 +1,17 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from bdd.models import Etudiant, Experience, User , Quest
+from bdd.models import Etudiant, Experience, User , Quest , Opportunities , Event
 
 
 class UpdateQuest(APIView):
     def post(self, request):
         try:
+            print(request.data)
             # Fetch the existing Quest object for the user
             user_id = request.data.get('user_id')
             quest = Quest.objects.get(id_user=user_id)
+            print (quest)
 
             # Update the responses only if the new response is provided, else retain the old value
             resp_one = request.data.get('resp_one', quest.resp_one)  # Use old value if not provided
@@ -109,3 +111,77 @@ class AddExperience(APIView):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+class CreateOpportunity(APIView):
+    def post(self, request):
+        try:
+            # Extract user ID from request data
+            user_id = request.data.get('user_id')
+            user = User.objects.get(id_user=user_id)
+
+            # Extract other opportunity details
+            type = request.data.get('type')
+            title = request.data.get('title')
+            duree = request.data.get('duree')
+            domaine = request.data.get('domaine', "dev")  # Default value
+            description = request.data.get('description', "No description available")  # Default
+            location = request.data.get('location')
+            date_debut = request.data.get('date_debut', "2025-01-01")  # Default
+
+            # Create the opportunity
+            opportunity = Opportunities.objects.create(
+                id_user=user,
+                type=type,
+                title=title,
+                duree=duree,
+                domaine=domaine,
+                description=description,
+                location=location,
+                date_debut=date_debut
+            )
+
+            return Response({"message": "Opportunity created successfully", "id_opp": opportunity.id_opp}, status=status.HTTP_201_CREATED)
+
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateEvent(APIView):
+    def post(self, request):
+        try:
+            # Extract user ID from request data
+            user_id = request.data.get('user_id')
+            user = User.objects.get(id_user=user_id)
+
+            # Extract event details
+            nom = request.data.get('nom')
+            description = request.data.get('description', "")
+            date = request.data.get('date')
+            time = request.data.get('time')
+            domaine = request.data.get('domaine')
+            type = request.data.get('type')
+            wilaya = request.data.get('wilaya')
+            lien = request.data.get('lien', None)  # Optional field
+            img = request.FILES.get('img', None)  # Handle image upload
+
+            # Create the event
+            event = Event.objects.create(
+                id_user=user,
+                nom=nom,
+                description=description,
+                date=date,
+                time=time,
+                domaine=domaine,
+                type=type,
+                wilaya=wilaya,
+                lien=lien,
+                img=img
+            )
+
+            return Response({"message": "Event created successfully", "id_event": event.id_event}, status=status.HTTP_201_CREATED)
+
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
