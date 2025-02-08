@@ -304,7 +304,7 @@ const SkillsAndExperience = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Company
+                  Domaine
                 </label>
                 <input
                   type="text"
@@ -316,7 +316,7 @@ const SkillsAndExperience = () => {
                     })
                   }
                   className="w-full px-3 py-2 border rounded-lg"
-                  placeholder="e.g. Google"
+                  placeholder="e.g. Dev"
                 />
               </div>
               <div>
