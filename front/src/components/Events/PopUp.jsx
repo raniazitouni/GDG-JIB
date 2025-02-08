@@ -13,7 +13,8 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
       domaine: formData.Domaine,
       type: formData.Type,
       wilaya: formData.Wilaya,
-    };
+    }; 
+    
   };
 
   const handleSubmit = async (event) => {

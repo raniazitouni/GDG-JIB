@@ -67,7 +67,7 @@ const Layout = () => {
             <Route path="/add-event" element={<AddEvent />} />
           </Route>
 
-          <Route element={<RequireAuth allowedRoles={[ROLES[0] ,ROLES[2]]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES[0], ROLES[2]]} />}>
             <Route path="/internships" element={<Internships />} />
           </Route>
 
@@ -79,12 +79,10 @@ const Layout = () => {
             <Route path="/AddInternships" element={<AddInternships />} />
           </Route>
 
-          
-
           {/* add opportunities , interships , addinternships , chat */}
 
-          <Route path="/settings" element={<Setting />} />
-          <Route path="/profil" element={<Profil />} />
+          {/* <Route path="/settings" element={<Setting />} /> */}
+          <Route path="/profil" element={<Setting />} />
 
           {/* <Route path="unauthorized" element={<Unauthorized />} /> */}
         </Routes>
