@@ -7,16 +7,14 @@ export function ListCards({ events,  IsClicked }) {
   return (
     <>
       <div
-        className="h-[650px] overflow-auto grid grid-cols-1 
+        className="min-h-0  grid grid-cols-1 
       md:grid-cols-3 gap-x-[0px] gap-y-[23px] w-full bg-[#f3f3f3]"
       >
         {events.map((card, index) => (
           <Card key={index} {...card} />
         ))}
       </div>
-        <div className="relative h-full">
         
-        </div>
       
       
     </>

@@ -25,25 +25,25 @@ const SideBar = ({ Role }) => {
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
         { name: "Add event", page: "/add-event", icon: Add, icon2: Add2 },
-        {
-          name: "Settings",
-          page: "/settings",
-          icon: Settings,
-          icon2: Settings2,
-        },
+        // {
+        //   name: "Settings",
+        //   page: "/settings",
+        //   icon: Settings,
+        //   icon2: Settings2,
+        // },
       ];
       break;
 
     case "etudiant":
       list = [
         { name: "Events", page: "/events", icon: Grid2, icon2: Grid },
-        { name: "Internships", page: "/interships", icon: Grid2, icon2: Grid },
-        {
-          name: "Settings",
-          page: "/settings",
-          icon: Settings,
-          icon2: Settings2,
-        },
+        { name: "Internships", page: "/internships", icon: Grid2, icon2: Grid },
+        // {
+        //   name: "Settings",
+        //   page: "/settings",
+        //   icon: Settings,
+        //   icon2: Settings2,
+        // },
         { name: "Chat", page: "/Chat", icon: Chat, icon2: Chat2 },
       ];
       break;
@@ -57,12 +57,12 @@ const SideBar = ({ Role }) => {
           icon: Add,
           icon2: Add2,
         },
-        {
-          name: "Settings",
-          page: "/settings",
-          icon: Settings,
-          icon2: Settings2,
-        },
+        // {
+        //   name: "Settings",
+        //   page: "/settings",
+        //   icon: Settings,
+        //   icon2: Settings2,
+        // },
       ];
       break;
   }

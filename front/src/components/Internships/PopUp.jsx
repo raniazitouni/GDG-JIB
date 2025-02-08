@@ -1,6 +1,7 @@
 import cross from "../../../public/Assets/eventAssets/cross.svg";
-import Titre from "./Titre";
-export function PopUP({ clickHandler, formData, setFormData, fetch }) {
+import Titre from "./Title";
+
+export function PopUP({ clickHandler, formData, setFormData, fetchSearch }) {
   function changeHandler(event) {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -12,9 +13,8 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
     return {
       domaine: formData.Domaine,
       type: formData.Type,
-      wilaya: formData.Wilaya,
-    }; 
-    
+      duree: formData.duree,
+    };
   };
 
   const handleSubmit = async (event) => {
@@ -23,13 +23,14 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
     const requestBody = {
       formData: dataMapper(formData),
     };
-    fetch(requestBody);
+    console.log("req", requestBody);
+
+    fetchSearch(requestBody);
     clickHandler();
   };
 
   return (
-    <div className="p-6 bg-white shadow-lg rounded-lg w-full ">
-      
+    <div className="p-6 bg-white shadow-lg rounded-lg w-full max-w-md">
       <Titre text="Filters" icon={cross} clickHandler={clickHandler} />
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {/* Domaine */}
@@ -58,16 +59,16 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
           />
         </div>
 
-        {/* Wilaya */}
+        {/* Duree */}
         <div className="flex flex-col">
-          <label className="font-medium">Wilaya</label>
+          <label className="font-medium">Duree</label>
           <input
             type="text"
-            name="Wilaya"
-            value={formData.Wilaya}
+            name="duree"
+            value={formData.duree}
             onChange={changeHandler}
             className="border p-2 rounded-md"
-            placeholder="Entrez la wilaya"
+            placeholder="Duree ex : 2016-2019"
           />
         </div>
 
@@ -75,7 +76,7 @@ export function PopUP({ clickHandler, formData, setFormData, fetch }) {
           type="submit"
           className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
         >
-          Submit
+          save
         </button>
       </form>
     </div>

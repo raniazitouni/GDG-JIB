@@ -72,7 +72,3 @@ class search_opp (APIView):
                 {"message": "User created successfully", "Opportunities": serliazer_opp},
                 status=status.HTTP_201_CREATED,
         )
-      
-
-
-      
