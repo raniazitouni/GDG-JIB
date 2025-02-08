@@ -7,14 +7,10 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState("default");
 
   return (
-    <div className="flex-1 bg-gray-50 p-6">
-      <div className="bg-white shadow-md rounded-lg p-6">
-        <div className="flex justify-between items-center pb-4 border-b">
-          <h1 className="text-2xl font-bold">Profil</h1>
-        </div>
-
+    <div className="flex-1 bg-gray-50 max-h-[calc(100vh-100px)] p-4">
+      <div className="bg-white shadow-md rounded-lg p-4">
         {/* Updated flex container with borders and hover effects */}
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-5">
           {/* Left spacer */}
           <div className="flex-1"></div>
 
@@ -30,10 +26,10 @@ const Settings = () => {
             >
               Default Questions
             </button>
-            
+
             {/* Vertical divider */}
             <div className="w-px bg-gray-300 mx-6"></div>
-            
+
             <button
               className={`pb-2 px-6 text-lg font-medium border-b-2 transition-all duration-200 ${
                 activeTab === "skills"

@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from bdd.models import Etudiant, Experience ,User, Club, Entreprise ,Quest , CV
+from bdd.models import Etudiant, Experience ,User, Club, Entreprise ,Quest , CV ,Opportunities, Notification
 from bdd.serializers import EtudiantSerializer , ExperienceSerializer , ClubSerializer, EntrepriseSerializer
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
@@ -11,6 +11,7 @@ from reportlab.lib.utils import simpleSplit
 import os
 from django.conf import settings
 from django.core.files import File
+from django.http import FileResponse
 
 
 
@@ -187,7 +188,9 @@ class GenerateCV(APIView):
                     defaults={'fichier': File(pdf_file, name=file_name)},
                 )
 
-            return Response({"message": "CV generated successfully"}, status=status.HTTP_200_OK)
+            
+            return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=file_name)
+            # return Response({"message": "CV generated successfully"}, status=status.HTTP_200_OK)
 
         except User.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
@@ -197,3 +200,52 @@ class GenerateCV(APIView):
             return Response({'error': 'No experiences found for this user'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class CreateNotification(APIView):
+    def post(self, request):
+        try:
+            # Extract data from request
+            user_id = request.data.get("user_id")
+            opp_id = request.data.get("opp_id")
+            quest_data = request.data.get("quest", {})
+
+            # Fetch the user
+            user = User.objects.get(id_user=user_id)
+
+            # Update existing Quest for the user
+            quest, created = Quest.objects.get_or_create(id_user=user)
+            quest.resp_one = quest_data.get("resp_one", quest.resp_one)
+            quest.resp_two = quest_data.get("resp_two", quest.resp_two)
+            quest.resp_three = quest_data.get("resp_three", quest.resp_three)
+            quest.save()
+
+            # Fetch the opportunity
+            opportunity = Opportunities.objects.get(id_opp=opp_id)
+
+            # Get the latest CV of the user (assuming a user can have multiple CVs)
+            cv = CV.objects.filter(id_user=user).order_by('-id_cv').first()
+            if not cv:
+                return Response({"error": "User does not have a CV"}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Get only the file path of the CV
+            cv_path = cv.fichier.url if cv.fichier else None
+            if not cv_path:
+                return Response({"error": "CV file not found"}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Create a new Notification storing only the CV path
+            notification = Notification.objects.create(
+                id_user=user,
+                id_opp=opportunity,
+                #cv_path=cv_path,  # Store only the path
+                etat="non validÃ©"
+            )
+
+            return Response({"message": "Quest updated and Notification created successfully"}, status=status.HTTP_200_OK)
+
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Opportunities.DoesNotExist:
+            return Response({"error": "Opportunity not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
