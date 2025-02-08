@@ -1,18 +1,25 @@
 /* eslint-disable react/prop-types */
-import Calendar_Days from "../../../public/Assets/eventAssets/Calendar_Days.svg"
-import Map_Pin from "../../../public/Assets/eventAssets/Map_Pin.svg"
+import Calendar_Days from "../../../public/Assets/eventAssets/Calendar_Days.svg";
+import Map_Pin from "../../../public/Assets/eventAssets/Map_Pin.svg";
 import { useNavigate } from "react-router-dom";
 
-export function InternshipCard({ img, title , description , duree , location }) {
+export function InternshipCard({ img, title, description, duree, location }) {
   const navigate = useNavigate();
+  const imgUrl = `http://127.0.0.1:8000${img}`;
 
   return (
     <div
       className="w-[350px] relative px-4 py-3.5 gap-4 rounded bg-white flex flex-col shadow-lg shadow-gray-400 transition-shadow duration-300 hover:cursor-pointer"
-      onClick={()=>{navigate("/ApplyInternships")}}
+      onClick={() => {
+        navigate("/ApplyInternships");
+      }}
     >
       {/* Image */}
-      <img className="w-full h-48 object-cover rounded" src={img} alt={title} />
+      <img
+        className="w-full h-48 object-cover rounded"
+        src={imgUrl}
+        alt={title}
+      />
 
       {/* Titre */}
       <h2 className="text-main_blue text-[20px] font-black mt-2">{title}</h2>
